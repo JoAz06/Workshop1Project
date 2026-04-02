@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.project_3.HubController"
+      prefWidth="900" prefHeight="600">
+
+    <StackPane fx:id="imagePanel" HBox.hgrow="ALWAYS"
+               style="-fx-background-color: linear-gradient(to bottom right, #0f3460, #16213e, #0a0a1a);">
+        <ImageView fx:id="hubImageView" fitWidth="450" fitHeight="600"
+                   preserveRatio="false" smooth="true"/>
+        <VBox alignment="BOTTOM_CENTER" style="-fx-padding: 0 0 40 0;">
+            <Text text="Project Hub"
+                  style="-fx-fill: white; -fx-font-size: 32; -fx-font-family: 'Tahoma';
+                         -fx-effect: dropshadow(gaussian, black, 8, 0.6, 0, 2);"/>
+            <Text text="Select a system to continue"
+                  style="-fx-fill: #aaaacc; -fx-font-size: 14; -fx-font-family: 'Tahoma';
+                         -fx-effect: dropshadow(gaussian, black, 4, 0.4, 0, 1);"/>
+        </VBox>
+    </StackPane>
+
+    <VBox prefWidth="350" alignment="CENTER" spacing="22"
+          style="-fx-background-color: #1a1a2e;">
+        <padding>
+            <Insets top="80" right="45" bottom="80" left="45"/>
+        </padding>
+
+        <Label text="Choose a System"
+               style="-fx-text-fill: #ccccee; -fx-font-family: 'Tahoma'; -fx-font-size: 15;"/>
+
+        <Button fx:id="hospitalBtn" text="🏥   Hospital"
+                onAction="#handleHospital"
+                prefWidth="260" prefHeight="90"
+                focusTraversable="false"
+                style="-fx-background-color: #c0392b;
+                       -fx-text-fill: white;
+                       -fx-font-family: 'Tahoma';
+                       -fx-font-size: 17;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 10;
+                       -fx-cursor: hand;"/>
+
+        <Button fx:id="schoolBtn" text="🎓   School"
+                onAction="#handleSchool"
+                prefWidth="260" prefHeight="90"
+                focusTraversable="false"
+                style="-fx-background-color: #1a5276;
+                       -fx-text-fill: white;
+                       -fx-font-family: 'Tahoma';
+                       -fx-font-size: 17;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 10;
+                       -fx-cursor: hand;"/>
+
+        <Button fx:id="officeBtn" text="💼   Office"
+                onAction="#handleOffice"
+                prefWidth="260" prefHeight="90"
+                focusTraversable="false"
+                style="-fx-background-color: #1e8449;
+                       -fx-text-fill: white;
+                       -fx-font-family: 'Tahoma';
+                       -fx-font-size: 17;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 10;
+                       -fx-cursor: hand;"/>
+    </VBox>
+</HBox>
