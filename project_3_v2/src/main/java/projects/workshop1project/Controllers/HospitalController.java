@@ -1,4 +1,4 @@
-package com.example.project_3;
+package projects.workshop1project.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -6,6 +6,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import projects.workshop1project.PatientRecord;
+import projects.workshop1project.PatientStore;
 
 import java.time.LocalDate;
 

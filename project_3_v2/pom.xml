@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>project_3</artifactId>
+    <groupId>projects</groupId>
+    <artifactId>Workshop1Project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <n>project_3</n>
 
@@ -58,7 +58,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.project_3/com.example.project_3.MainApp</mainClass>
+                            <mainClass>projects.project_3/projects.workshop1project.MainApp</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
