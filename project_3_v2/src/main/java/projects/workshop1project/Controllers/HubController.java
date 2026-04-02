@@ -1,4 +1,4 @@
-package com.example.project_3;
+package projects.workshop1project.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import projects.workshop1project.Controllers.HospitalController;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +23,7 @@ public class HubController {
 
     @FXML
     private void initialize() {
-        InputStream imgStream = getClass().getResourceAsStream("hub_bg.jpg");
+        InputStream imgStream = getClass().getResourceAsStream("/projects/workshop1project/Images/hub_bg.jpg");
         if (imgStream != null) {
             hubImageView.setImage(new Image(imgStream));
         }
@@ -31,7 +32,7 @@ public class HubController {
     @FXML
     private void handleHospital() throws IOException {
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("hospital.fxml"));
+                getClass().getResource("/projects/workshop1project/Views/hospital.fxml"));
         Scene hospitalScene = new Scene(loader.load(), 1000, 700);
 
         HospitalController hospitalCtrl = loader.getController();

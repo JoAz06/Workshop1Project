@@ -1,4 +1,4 @@
-package com.example.project_3;
+package projects.workshop1project.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import projects.workshop1project.Controllers.HubController;
 
 import java.io.IOException;
 
@@ -52,7 +53,7 @@ public class LoginController {
         }
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("hub.fxml"));
+                getClass().getResource("/projects/workshop1project/Views/hub.fxml"));
         Scene hubScene = new Scene(loader.load(), 900, 600);
 
         HubController hubCtrl = loader.getController();

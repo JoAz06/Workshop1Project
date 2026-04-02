@@ -1,4 +1,4 @@
-package com.example.project_3;
+package projects.workshop1project;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

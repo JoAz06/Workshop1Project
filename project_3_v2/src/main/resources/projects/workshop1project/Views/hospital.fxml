@@ -18,7 +18,7 @@
 <VBox spacing="20"
       xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.project_3.HospitalController">
+      fx:controller="projects.workshop1project.Controllers.HospitalController">
 
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>

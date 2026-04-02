@@ -11,7 +11,7 @@
 
 <HBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.project_3.HubController"
+      fx:controller="projects.workshop1project.Controllers.HubController"
       prefWidth="900" prefHeight="600">
 
     <StackPane fx:id="imagePanel" HBox.hgrow="ALWAYS"

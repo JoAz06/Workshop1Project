@@ -1,7 +1,7 @@
-module com.example.project_3 {
+module projects.workshop1project {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens com.example.project_3 to javafx.fxml;
-    exports com.example.project_3;
+    opens projects.workshop1project.Controllers to javafx.fxml;
+    exports projects.workshop1project;
 }
