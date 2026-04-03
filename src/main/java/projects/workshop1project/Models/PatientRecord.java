@@ -1,4 +1,4 @@
-package projects.workshop1project;
+package projects.workshop1project.Models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
