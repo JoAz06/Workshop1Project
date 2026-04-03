@@ -19,6 +19,7 @@ public class LoginController {
         {"Teammate3","pass3"}
     };
 
+
     @FXML private TextField userFld;
     @FXML private PasswordField passFld;
     @FXML private Text loginError;

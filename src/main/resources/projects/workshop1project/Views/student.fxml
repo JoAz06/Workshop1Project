@@ -88,7 +88,7 @@
             <Button fx:id="create" maxWidth="100.0" mnemonicParsing="false" onAction="#handleCreate" text="Create" HBox.hgrow="ALWAYS" />
             <Button maxWidth="100.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete" HBox.hgrow="ALWAYS" />
             <Button maxWidth="100.0" mnemonicParsing="false" onAction="#handleUpdate" text="Update" HBox.hgrow="ALWAYS" />
-            <Text fx:id="error" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="error" strokeType="OUTSIDE" strokeWidth="0.0" fill="RED"/>
          </children></HBox>
       <TableView fx:id="studentTable" prefHeight="387.0" prefWidth="1031.0">
         <columns>
