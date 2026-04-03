@@ -34,27 +34,21 @@ public class HubController {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/projects/workshop1project/Views/hospital.fxml"));
         Scene hospitalScene = new Scene(loader.load(), 1000, 700);
-
-        HospitalController hospitalCtrl = loader.getController();
-        hospitalCtrl.setPrimaryStage(primaryStage);
-
         primaryStage.setTitle("Hospital System – Check-in");
         primaryStage.setResizable(false);
         primaryStage.setScene(hospitalScene);
+        primaryStage.centerOnScreen();
     }
 
     @FXML
     private void handleSchool() throws IOException {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/projects/workshop1project/Views/student.fxml"));
-        Scene hospitalScene = new Scene(loader.load(), 1000, 700);
-
-        HospitalController hospitalCtrl = loader.getController();
-        hospitalCtrl.setPrimaryStage(primaryStage);
-
-        primaryStage.setTitle("Hospital System – Check-in");
+        Scene studentScene = new Scene(loader.load(), 1000, 700);
+        primaryStage.setTitle("Student System – Admission");
         primaryStage.setResizable(false);
-        primaryStage.setScene(hospitalScene);
+        primaryStage.setScene(studentScene);
+        primaryStage.centerOnScreen();
     }
 
     @FXML

@@ -62,5 +62,6 @@ public class LoginController {
         primaryStage.setTitle("Project Hub");
         primaryStage.setResizable(false);
         primaryStage.setScene(hubScene);
+        primaryStage.centerOnScreen();
     }
 }

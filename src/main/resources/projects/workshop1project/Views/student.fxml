@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -21,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.workshop1project.Controllers.StudentController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Student" wrappingWidth="147.0316162109375">
          <font>
@@ -33,8 +34,9 @@
       </Text>
       <GridPane prefHeight="163.0" prefWidth="862.0" vgap="20.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.4000244140625" minWidth="10.0" prefWidth="109.59997787475587" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="852.4000091552734" minWidth="10.0" prefWidth="580.6000221252441" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.4000244140625" minWidth="10.0" prefWidth="184.00000801086426" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="852.4000091552734" minWidth="10.0" prefWidth="383.5999694824219" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="852.4000091552734" minWidth="10.0" prefWidth="434.8000305175781" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -50,7 +52,7 @@
             <Label text="Gender" GridPane.rowIndex="2" />
             <TextField fx:id="fname" maxHeight="25.0" maxWidth="300.0" minHeight="25.0" prefHeight="25.0" prefWidth="313.0" GridPane.columnIndex="1" />
             <DatePicker fx:id="dob" maxHeight="25.0" maxWidth="300.0" minHeight="25.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx: evenly;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <RadioButton mnemonicParsing="false" selected="true" text="Male">
                      <toggleGroup>
@@ -63,21 +65,20 @@
                   <Insets />
                </GridPane.margin>
             </HBox>
-            <Slider maxWidth="400.0" minorTickCount="1" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="GPA :" GridPane.rowIndex="5" />
+            <Slider fx:id="gpa" majorTickUnit="1.0" maxWidth="400.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor></Slider>
+            <Label fx:id="gpalabel" text="GPA : 0" GridPane.rowIndex="5" />
             <Label text="Address :" GridPane.rowIndex="4" />
             <Label text="Degree :" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="degree" prefWidth="150.0" value="Computer Science" GridPane.columnIndex="1" GridPane.rowIndex="3">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Computer Science" />
-                        <String fx:value="Biomedical Engineering" />
-                        <String fx:value="Psychology" />
-                        <String fx:value="Biology" />
                     </FXCollections>
                 </items>
             </ChoiceBox>
-            <TextField maxHeight="25.0" maxWidth="300.0" minHeight="25.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="address" maxHeight="25.0" maxWidth="300.0" minHeight="25.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
          <padding>
             <Insets left="10.0" />
@@ -85,18 +86,22 @@
       </GridPane>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="990.0" spacing="50.0">
          <children>
-            <Button maxWidth="100.0" mnemonicParsing="false" text="Create" HBox.hgrow="ALWAYS" />
-            <Button maxWidth="100.0" mnemonicParsing="false" text="Delete" HBox.hgrow="ALWAYS" />
-            <Button maxWidth="100.0" mnemonicParsing="false" text="Update" HBox.hgrow="ALWAYS" />
+            <Button fx:id="create" maxWidth="100.0" mnemonicParsing="false" onAction="#handleCreate" text="Create" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="100.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete" HBox.hgrow="ALWAYS" />
+            <Button maxWidth="100.0" mnemonicParsing="false" onAction="#handleUpdate" text="Update" HBox.hgrow="ALWAYS" />
          </children></HBox>
-      <TableView prefHeight="371.0" prefWidth="990.0">
+      <TableView fx:id="studentTable" prefHeight="387.0" prefWidth="1031.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="fnameCol" prefWidth="100.0" text="Full Name" />
+          <TableColumn fx:id="dobCol" prefWidth="100.0" text="Date of Birth" />
+            <TableColumn fx:id="genderCol" prefWidth="100.0" text="Gender" />
+            <TableColumn fx:id="degreeCol" prefWidth="100.0" text="Degree" />
+            <TableColumn fx:id="addressCol" prefWidth="300.0" text="Address" />
+            <TableColumn fx:id="gpaCol" prefWidth="100.0" text="GPA" />
         </columns>
       </TableView>
    </children>
    <padding>
-      <Insets right="10.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" />
    </padding>
 </VBox>

@@ -6,8 +6,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import projects.workshop1project.PatientRecord;
-import projects.workshop1project.PatientStore;
+import projects.workshop1project.Models.PatientRecord;
+import projects.workshop1project.Models.PatientStore;
 
 import java.time.LocalDate;
 
