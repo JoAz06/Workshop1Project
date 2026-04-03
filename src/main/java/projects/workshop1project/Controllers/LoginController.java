@@ -15,13 +15,13 @@ public class LoginController {
 
     private static final String[][] CREDENTIALS = {
         {"Ryan",     "6769"},
-        {"Teammate2","pass2"},
+        {"a","a"},
         {"Teammate3","pass3"}
     };
 
-    @FXML private TextField     userFld;
+    @FXML private TextField userFld;
     @FXML private PasswordField passFld;
-    @FXML private Text          loginError;
+    @FXML private Text loginError;
 
     private Stage primaryStage;
 

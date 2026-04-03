@@ -11,7 +11,8 @@ public class StudentStore {
         students.addAll(
                 new StudentRecord("John Cena", LocalDate.parse("2000-01-23"), "NY", "Male","Computer Science",90),
                 new StudentRecord("Joe Biden", LocalDate.parse("1998-11-05"), "Boston", "Male","Computer Science",23),
-                new StudentRecord("Sarah Connor", LocalDate.parse("2000-01-23"), "NY", "Female","Computer Science",90)
+                new StudentRecord("Sarah Connor", LocalDate.parse("2000-01-23"), "NY", "Female","Computer Science",90),
+                new StudentRecord("Jawad Haidar", LocalDate.parse("2006-06-19"), "Lebanon", "Male","Computer Science",88)
         );
     }
     public StudentStore() {
