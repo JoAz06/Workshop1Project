@@ -2,6 +2,7 @@ package projects.workshop1project.Models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import projects.workshop1project.Models.PatientRecord;
 
 public class PatientStore {
 
