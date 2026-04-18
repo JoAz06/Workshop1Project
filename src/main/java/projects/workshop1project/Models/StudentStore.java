@@ -18,7 +18,7 @@ public class StudentStore {
     public StudentStore() {
     }
 
-    public static ObservableList<StudentRecord> getStudentList() {
+    public ObservableList<StudentRecord> getStudentList() {
         return students;
     }
 
@@ -32,13 +32,14 @@ public class StudentStore {
             students.remove(student);
     }
 
-    public void updateStudent(StudentRecord student, String fname, LocalDate dob, String address, String gender, String degree) {
+    public void updateStudent(StudentRecord student, String fname, LocalDate dob, String address, String gender, String degree, int gpa) {
         if(student != null){
             student.setFname(fname);
             student.setDob(dob);
             student.setAddress(address);
             student.setGender(gender);
             student.setDegree(degree);
+            student.setGpa(gpa);
         }
     }
 }

@@ -33,6 +33,8 @@ public class StudentController {
     @FXML private Text error;
 
 
+    StudentStore studentStore = new StudentStore();
+
     public void initialize(){
         //Gpa slider listener to update the label when the value is changed
         gpa.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -53,8 +55,7 @@ public class StudentController {
         degreeCol.setCellValueFactory(new PropertyValueFactory<>("degree"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         gpaCol.setCellValueFactory(new PropertyValueFactory<>("gpa"));
-        ObservableList<StudentRecord> students = StudentStore.getStudentList();
-        studentTable.setItems(students);
+        studentTable.setItems(studentStore.getStudentList());
 
         //Filling values when selecting row in table to update later or delete
         studentTable.getSelectionModel().selectedItemProperty().addListener(evt -> {
@@ -74,15 +75,14 @@ public class StudentController {
     @FXML
     void handleCreate(ActionEvent event) {
         if(validate()){
-            studentTable.getItems().add(new StudentRecord(fname.getText(), dob.getValue(), address.getText(), gender.getSelectedToggle().getUserData().toString(),degree.getValue(),(int)gpa.getValue()));
+            studentStore.addStudent(new StudentRecord(fname.getText(), dob.getValue(), address.getText(), gender.getSelectedToggle().getUserData().toString(),degree.getValue(),(int)gpa.getValue()));
             clearFields();
         }
     }
 
     @FXML
     void handleDelete(ActionEvent event) {
-        StudentRecord selectedPerson = studentTable.getSelectionModel().getSelectedItem();
-        studentTable.getItems().remove(selectedPerson);
+        studentStore.deleteStudent(studentTable.getSelectionModel().getSelectedItem());
         clearFields();
         studentTable.getSelectionModel().clearSelection();
     }
@@ -90,13 +90,7 @@ public class StudentController {
     @FXML
     void handleUpdate(ActionEvent event) {
         if(validate()){
-            StudentRecord selectedPerson = studentTable.getSelectionModel().getSelectedItem();
-            selectedPerson.setFname(fname.getText());
-            selectedPerson.setAddress(address.getText());
-            selectedPerson.setGender(gender.getSelectedToggle().getUserData().toString());
-            selectedPerson.setDegree(degree.getValue());
-            selectedPerson.setAddress(address.getText());
-            selectedPerson.setGpa((int)gpa.getValue());
+            studentStore.updateStudent(studentTable.getSelectionModel().getSelectedItem(),fname.getText(), dob.getValue(), address.getText(), gender.getSelectedToggle().getUserData().toString(),degree.getValue(),(int)gpa.getValue());
             clearFields();
             studentTable.getSelectionModel().clearSelection();
         }
