@@ -61,8 +61,8 @@
                        -fx-background-radius: 10;
                        -fx-cursor: hand;"/>
 
-        <Button fx:id="officeBtn" text="💼   Office"
-                onAction="#handleOffice"
+        <Button fx:id="employeeBtn" text="💼   Employees"
+                onAction="#handleEmployee"
                 prefWidth="260" prefHeight="90"
                 focusTraversable="false"
                 style="-fx-background-color: #1e8449;

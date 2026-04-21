@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class EmployeeStore {
     private static final ObservableList<EmployeeRecord> employees = FXCollections.observableArrayList();
 
-    public ObservableList<EmployeeRecord> getEmployeesList(){
+    public static ObservableList<EmployeeRecord> getEmployeesList(){
         return employees;
     }
    public void addEmployees(EmployeeRecord employee) {

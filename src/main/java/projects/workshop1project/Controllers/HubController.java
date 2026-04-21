@@ -1,5 +1,6 @@
 package projects.workshop1project.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,8 +41,8 @@ public class HubController {
     }
 
     @FXML
-    private void handleOffice() {
-        System.out.println("Office – coming soon");
+    private void handleEmployee() throws  IOException {
+        initScene("/projects/workshop1project/Views/Employee.fxml" , 1000 , 700 , "Employee System - Check-in");
     }
 
 //    The code below was replaced by the initScene function to not repeat the same code for each page
@@ -64,4 +65,7 @@ public class HubController {
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
     }
-}
+
+
+    }
+
