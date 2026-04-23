@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.workshop1project.Controllers.EmployeeController">
+   <children>
+      <GridPane hgap="20.0" maxWidth="-Infinity" prefHeight="282.0" prefWidth="458.0" vgap="20.0">
+        <columnConstraints>
+          <ColumnConstraints />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.20001220703125" minWidth="10.0" prefWidth="124.00004043579102" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="428.59996337890624" minWidth="10.0" prefWidth="273.79995956420896" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints />
+          <RowConstraints maxHeight="45.4" minHeight="10.0" prefHeight="42.19998779296875" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="48.60001220703125" minHeight="10.0" prefHeight="48.60001220703125" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <TextField fx:id="nameField" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="idField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <TextField fx:id="ageField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="departmentBox" prefHeight="28.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Position:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="positionBox" prefHeight="28.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Label fx:id="salaryLabel" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" text="Salary: " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+            <Slider fx:id="salarySlider" majorTickUnit="100.0" max="5000.0" min="500.0" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HireDate:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+            <DatePicker fx:id="dateChooser" prefHeight="41.0" prefWidth="239.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </GridPane>
+      <Text fx:id="error" fill="#ea2806" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <HBox prefHeight="40.0" prefWidth="458.0" spacing="147.0">
+         <children>
+            <Button fx:id="create" mnemonicParsing="false" onAction="#handleCreate" text="Create" />
+            <Button fx:id="update" alignment="CENTER" mnemonicParsing="false" onAction="#handleUpdate" text="Update" />
+            <Button fx:id="delete" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <TableView fx:id="employeeTable" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="ageCol" prefWidth="75.0" text="Age" />
+            <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="salaryCol" prefWidth="75.0" text="Salary" />
+            <TableColumn fx:id="departmentCol" prefWidth="75.0" text="Deparment" />
+            <TableColumn fx:id="positionCol" prefWidth="75.0" text="Position" />
+            <TableColumn fx:id="hireDateCol" prefWidth="75.0" text="HireDate" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
