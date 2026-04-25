@@ -1,31 +1,43 @@
 package projects.workshop1project.Controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import projects.workshop1project.Models.PatientRecord;
 import projects.workshop1project.Models.PatientStore;
+import projects.workshop1project.NavigationUtil;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class HospitalController {
 
-    @FXML private TextField         nameFld;
-    @FXML private DatePicker        dobPck;
-    @FXML private RadioButton       maleRB;
-    @FXML private RadioButton       femaleRB;
-    private       ToggleGroup       genderGroup;
+    @FXML private TextField nameFld;
+    @FXML private DatePicker dobPck;
+    @FXML private RadioButton maleRB;
+    @FXML private RadioButton femaleRB;
+    private ToggleGroup genderGroup;
     @FXML private ChoiceBox<String> triageChoice;
-    @FXML private TextField         phoneFld;
-    @FXML private TextField         idFld;
-    @FXML private TextField         doctorFld;
-    @FXML private TextField         symptomsFld;
-    @FXML private Text              msgTxt;
+    @FXML private TextField phoneFld;
+    @FXML private TextField idFld;
+    @FXML private TextField doctorFld;
+    @FXML private TextField symptomsFld;
+    @FXML private Text msgTxt;
 
-    @FXML private TableView<PatientRecord>           table;
+    @FXML private TableView<PatientRecord> table;
     @FXML private TableColumn<PatientRecord, String> colName;
     @FXML private TableColumn<PatientRecord, String> colDob;
     @FXML private TableColumn<PatientRecord, String> colGender;
@@ -40,6 +52,7 @@ public class HospitalController {
     @FXML private Button deleteBtn;
     @FXML private Button clearBtn;
     @FXML private Button summaryBtn;
+    @FXML private Button backBtn;
 
     private final PatientStore store = new PatientStore();
     private Stage primaryStage;
@@ -90,6 +103,7 @@ public class HospitalController {
         colSymptoms.setCellValueFactory(new PropertyValueFactory<>("symptoms"));
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        store.loadPatientsFromDatabase();
         table.setItems(store.getPatientsList());
         dobPck.setValue(LocalDate.now());
 
@@ -107,7 +121,7 @@ public class HospitalController {
                     deleteBtn.setDisable(!has);
                 });
 
-        for (Button btn : new Button[]{createBtn, updateBtn, deleteBtn, clearBtn, summaryBtn}) {
+        for (Button btn : new Button[]{createBtn, updateBtn, deleteBtn, clearBtn, summaryBtn, backBtn}) {
             btn.setOnMouseReleased(e -> btn.getScene().getRoot().requestFocus());
         }
     }
@@ -115,7 +129,10 @@ public class HospitalController {
     @FXML
     private void handleCreate() {
         if (!validateForm()) return;
-        store.addPatient(buildRecordFromForm());
+        if (!store.addPatient(buildRecordFromForm())) {
+            msgError("Could not save patient. National ID may already exist.");
+            return;
+        }
         clearForm();
         unfocusButtons();
         msgSuccess("Patient record created successfully!");
@@ -127,7 +144,7 @@ public class HospitalController {
         if (selected == null) { msgError("Please select a record to update."); return; }
         if (!validateForm()) return;
 
-        store.updatePatient(selected,
+        boolean updated = store.updatePatient(selected,
                 nameFld.getText(),
                 dobPck.getValue().toString(),
                 selectedGenderText(),
@@ -136,6 +153,11 @@ public class HospitalController {
                 idFld.getText(),
                 doctorFld.getText(),
                 symptomsFld.getText());
+
+        if (!updated) {
+            msgError("Could not update patient. National ID may already exist.");
+            return;
+        }
 
         table.refresh();
         clearForm();
@@ -155,10 +177,13 @@ public class HospitalController {
         confirm.setHeaderText("Confirm Deletion");
         confirm.showAndWait().ifPresent(btn -> {
             if (btn == ButtonType.YES) {
-                store.deletePatient(selected);
-                clearForm();
-                unfocusButtons();
-                msgSuccess("Record deleted.");
+                if (store.deletePatient(selected)) {
+                    clearForm();
+                    unfocusButtons();
+                    msgSuccess("Record deleted.");
+                } else {
+                    msgError("Could not delete patient from database.");
+                }
             }
         });
     }
@@ -174,27 +199,33 @@ public class HospitalController {
     @FXML
     private void handleSummary() {
         unfocusButtons();
-        long low      = store.getPatientsList().stream().filter(r -> r.getTriage().equals("Low")).count();
-        long medium   = store.getPatientsList().stream().filter(r -> r.getTriage().equals("Medium")).count();
-        long high     = store.getPatientsList().stream().filter(r -> r.getTriage().equals("High")).count();
+        long low = store.getPatientsList().stream().filter(r -> r.getTriage().equals("Low")).count();
+        long medium = store.getPatientsList().stream().filter(r -> r.getTriage().equals("Medium")).count();
+        long high = store.getPatientsList().stream().filter(r -> r.getTriage().equals("High")).count();
         long critical = store.getPatientsList().stream().filter(r -> r.getTriage().equals("Critical")).count();
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Patient Summary");
         alert.setHeaderText("Total records: " + store.getPatientsList().size());
         alert.setContentText(
-                "Low: "      + low      + "\n" +
-                "Medium: "   + medium   + "\n" +
-                "High: "     + high     + "\n" +
+                "Low: " + low + "\n" +
+                "Medium: " + medium + "\n" +
+                "High: " + high + "\n" +
                 "Critical: " + critical
         );
         alert.showAndWait();
     }
 
+    @FXML
+    private void handleBack() throws IOException {
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        NavigationUtil.goToHub(stage);
+    }
+
     private boolean validateForm() {
-        if (nameFld.getText().isBlank()   ||
-                phoneFld.getText().isBlank()  ||
-                idFld.getText().isBlank()     ||
+        if (nameFld.getText().isBlank() ||
+                phoneFld.getText().isBlank() ||
+                idFld.getText().isBlank() ||
                 doctorFld.getText().isBlank() ||
                 symptomsFld.getText().isBlank()) {
             msgError("All fields are required!");
@@ -233,7 +264,7 @@ public class HospitalController {
         nameFld.setText(r.getFullName());
         dobPck.setValue(LocalDate.parse(r.getDob()));
         if ("Female".equals(r.getGender())) femaleRB.setSelected(true);
-        else                                maleRB.setSelected(true);
+        else maleRB.setSelected(true);
         triageChoice.setValue(r.getTriage());
         phoneFld.setText(r.getPhone());
         idFld.setText(r.getNationalId());
@@ -254,8 +285,9 @@ public class HospitalController {
     }
 
     private void unfocusButtons() {
-        if (createBtn.getScene() != null)
+        if (createBtn.getScene() != null) {
             createBtn.getScene().getRoot().requestFocus();
+        }
     }
 
     private void msgSuccess(String text) {
