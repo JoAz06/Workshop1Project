@@ -16,21 +16,30 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.workshop1project.Controllers.StudentController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="700.0" prefWidth="1000.0" spacing="20.0"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projects.workshop1project.Controllers.StudentController">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Student" wrappingWidth="147.0316162109375">
-         <font>
-            <Font size="39.0" />
-         </font>
+      <HBox alignment="CENTER_LEFT" spacing="10">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Student" wrappingWidth="147.0316162109375">
+            <font>
+               <Font size="39.0" />
+            </font>
+         </Text>
+         <Region HBox.hgrow="ALWAYS" />
+         <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleBack" text="Back" prefWidth="90.0" />
          <VBox.margin>
-            <Insets left="10.0" top="10.0" />
+            <Insets left="10.0" right="10.0" top="10.0" />
          </VBox.margin>
-      </Text>
+      </HBox>
+
       <GridPane prefHeight="163.0" prefWidth="862.0" vgap="20.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="484.4000244140625" minWidth="10.0" prefWidth="184.00000801086426" />
@@ -51,7 +60,7 @@
             <Label text="Gender" GridPane.rowIndex="2" />
             <TextField fx:id="fname" maxHeight="25.0" maxWidth="300.0" minHeight="25.0" prefHeight="25.0" prefWidth="313.0" GridPane.columnIndex="1" />
             <DatePicker fx:id="dob" maxHeight="25.0" maxWidth="300.0" minHeight="25.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx: evenly;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <RadioButton fx:id="maleRB" mnemonicParsing="false" selected="true" text="Male">
                      <toggleGroup>
@@ -67,14 +76,14 @@
             <Slider fx:id="gpa" majorTickUnit="1.0" maxWidth="400.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
-               </cursor></Slider>
+               </cursor>
+            </Slider>
             <Label fx:id="gpalabel" text="GPA : 0" GridPane.rowIndex="5" />
             <Label text="Address :" GridPane.rowIndex="4" />
             <Label text="Degree :" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="degree" prefWidth="150.0" value="Computer Science" GridPane.columnIndex="1" GridPane.rowIndex="3">
                 <items>
-                    <FXCollections fx:factory="observableArrayList">
-                    </FXCollections>
+                    <FXCollections fx:factory="observableArrayList" />
                 </items>
             </ChoiceBox>
             <TextField fx:id="address" maxHeight="25.0" maxWidth="300.0" minHeight="25.0" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -88,14 +97,16 @@
             <Button fx:id="create" maxWidth="100.0" mnemonicParsing="false" onAction="#handleCreate" text="Create" HBox.hgrow="ALWAYS" />
             <Button maxWidth="100.0" mnemonicParsing="false" onAction="#handleDelete" text="Delete" HBox.hgrow="ALWAYS" />
             <Button maxWidth="100.0" mnemonicParsing="false" onAction="#handleUpdate" text="Update" HBox.hgrow="ALWAYS" />
-            <Text fx:id="error" strokeType="OUTSIDE" strokeWidth="0.0" fill="RED"/>
-         </children></HBox>
+            <Text fx:id="error" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </children>
+      </HBox>
       <TableView fx:id="studentTable" prefHeight="387.0" prefWidth="1031.0">
         <columns>
-          <TableColumn fx:id="fnameCol" prefWidth="100.0" text="Full Name" />
-          <TableColumn fx:id="dobCol" prefWidth="100.0" text="Date of Birth" />
+          <TableColumn fx:id="studentIdCol" prefWidth="80.0" text="Student ID" />
+          <TableColumn fx:id="fnameCol" prefWidth="120.0" text="Full Name" />
+          <TableColumn fx:id="dobCol" prefWidth="110.0" text="Date of Birth" />
             <TableColumn fx:id="genderCol" prefWidth="100.0" text="Gender" />
-            <TableColumn fx:id="degreeCol" prefWidth="100.0" text="Degree" />
+            <TableColumn fx:id="degreeCol" prefWidth="150.0" text="Degree" />
             <TableColumn fx:id="addressCol" prefWidth="300.0" text="Address" />
             <TableColumn fx:id="gpaCol" prefWidth="100.0" text="GPA" />
         </columns>

@@ -14,9 +14,9 @@ import java.io.IOException;
 public class LoginController {
 
     private static final String[][] CREDENTIALS = {
-        {"Ryan",     "6769"},
-        {"a","a"},
-        {"Teammate3","pass3"}
+        {"Ryan",     "Eid"},
+        {"Joseph","Azzi"},
+        {"Nerses","Touzjian"}
     };
 
 

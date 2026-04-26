@@ -12,12 +12,30 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="647.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.workshop1project.Controllers.EmployeeController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="700.0" prefWidth="1000.0" spacing="10.0"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="projects.workshop1project.Controllers.EmployeeController">
    <children>
+      <HBox alignment="CENTER_LEFT" spacing="10.0">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Employee">
+            <font>
+               <Font size="39.0" />
+            </font>
+         </Text>
+         <Region HBox.hgrow="ALWAYS" />
+         <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleBack" text="Back" prefWidth="90.0" />
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </HBox>
+
       <GridPane hgap="20.0" maxWidth="-Infinity" prefHeight="282.0" prefWidth="458.0" vgap="20.0">
         <columnConstraints>
           <ColumnConstraints />
@@ -68,16 +86,19 @@
             <Insets top="10.0" />
          </VBox.margin>
       </HBox>
-      <TableView fx:id="employeeTable" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="employeeTable" prefHeight="250.0" prefWidth="980.0">
         <columns>
-          <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="nameCol" prefWidth="150.0" text="Name" />
           <TableColumn fx:id="ageCol" prefWidth="75.0" text="Age" />
-            <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="salaryCol" prefWidth="75.0" text="Salary" />
-            <TableColumn fx:id="departmentCol" prefWidth="75.0" text="Deparment" />
-            <TableColumn fx:id="positionCol" prefWidth="75.0" text="Position" />
-            <TableColumn fx:id="hireDateCol" prefWidth="75.0" text="HireDate" />
+            <TableColumn fx:id="idCol" prefWidth="100.0" text="ID" />
+            <TableColumn fx:id="salaryCol" prefWidth="100.0" text="Salary" />
+            <TableColumn fx:id="departmentCol" prefWidth="170.0" text="Department" />
+            <TableColumn fx:id="positionCol" prefWidth="130.0" text="Position" />
+            <TableColumn fx:id="hireDateCol" prefWidth="130.0" text="HireDate" />
         </columns>
       </TableView>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" />
+   </padding>
 </VBox>

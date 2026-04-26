@@ -12,6 +12,8 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        DatabaseManager.initializeDatabase();
+
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/projects/workshop1project/Views/login.fxml"));
         Scene scene = new Scene(loader.load(), 320, 260);
