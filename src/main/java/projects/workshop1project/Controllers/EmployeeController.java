@@ -78,7 +78,6 @@ public class EmployeeController {
         positionCol.setCellValueFactory(new PropertyValueFactory<>("empPosition"));
         hireDateCol.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
 
-        employeeStore.loadEmployeesFromDatabase();
         employeeTable.setItems(employeeStore.getEmployeesList());
 
         employeeTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, selectedPerson) -> {

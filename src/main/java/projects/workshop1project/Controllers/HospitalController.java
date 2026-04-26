@@ -103,7 +103,6 @@ public class HospitalController {
         colSymptoms.setCellValueFactory(new PropertyValueFactory<>("symptoms"));
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        store.loadPatientsFromDatabase();
         table.setItems(store.getPatientsList());
         dobPck.setValue(LocalDate.now());
 

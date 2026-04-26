@@ -15,32 +15,31 @@ public class PatientStore {
     private final ObservableList<PatientRecord> patients = FXCollections.observableArrayList();
 
     public ObservableList<PatientRecord> getPatientsList() {
-        return patients;
-    }
+        if(patients.isEmpty()) {
+            String sql = "SELECT * FROM patients";
 
-    public void loadPatientsFromDatabase() {
-        patients.clear();
-        String sql = "SELECT national_id, full_name, dob, gender, triage, phone, doctor, symptoms FROM patients";
+            try (Connection conn = DatabaseManager.getConnection();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
 
-        try (Connection conn = DatabaseManager.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                patients.add(new PatientRecord(
-                        rs.getString("full_name"),
-                        rs.getString("dob"),
-                        rs.getString("gender"),
-                        rs.getString("triage"),
-                        rs.getString("phone"),
-                        rs.getString("national_id"),
-                        rs.getString("doctor"),
-                        rs.getString("symptoms")
-                ));
+                while (rs.next()) {
+                    patients.add(new PatientRecord(
+                            rs.getString("full_name"),
+                            rs.getString("dob"),
+                            rs.getString("gender"),
+                            rs.getString("triage"),
+                            rs.getString("phone"),
+                            rs.getString("national_id"),
+                            rs.getString("doctor"),
+                            rs.getString("symptoms")
+                    ));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return patients;
         }
+        return patients;
     }
 
     public boolean addPatient(PatientRecord p) {

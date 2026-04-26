@@ -15,30 +15,28 @@ public class StudentStore {
     private final ObservableList<StudentRecord> students = FXCollections.observableArrayList();
 
     public ObservableList<StudentRecord> getStudentList() {
-        return students;
-    }
+        if(students.isEmpty()) {
+            String sql = "SELECT * FROM students";
 
-    public void loadStudentsFromDatabase() {
-        students.clear();
-        String sql = "SELECT student_id, fname, dob, address, gender, degree, gpa FROM students";
+            try (Connection conn = DatabaseManager.getConnection();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
 
-        try (Connection conn = DatabaseManager.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                students.add(new StudentRecord(
-                        rs.getInt("student_id"),
-                        rs.getString("fname"),
-                        LocalDate.parse(rs.getString("dob")),
-                        rs.getString("address"),
-                        rs.getString("gender"),
-                        rs.getString("degree"),
-                        rs.getInt("gpa")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+                while (rs.next()) {
+                    students.add(new StudentRecord(
+                            rs.getInt("student_id"),
+                            rs.getString("fname"),
+                            LocalDate.parse(rs.getString("dob")),
+                            rs.getString("address"),
+                            rs.getString("gender"),
+                            rs.getString("degree"),
+                            rs.getInt("gpa")
+                    ));
+                }
+            } catch (SQLException e) {}
+            return students;
+        }else {
+            return students;
         }
     }
 
@@ -67,7 +65,6 @@ public class StudentStore {
             students.add(student);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -85,7 +82,6 @@ public class StudentStore {
             students.remove(student);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -116,7 +112,6 @@ public class StudentStore {
             student.setGpa(gpa);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }

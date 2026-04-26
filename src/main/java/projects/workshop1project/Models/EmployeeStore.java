@@ -15,31 +15,30 @@ public class EmployeeStore {
     private final ObservableList<EmployeeRecord> employees = FXCollections.observableArrayList();
 
     public ObservableList<EmployeeRecord> getEmployeesList() {
-        return employees;
-    }
+        if(employees.isEmpty()) {
+            String sql = "SELECT * FROM employees";
 
-    public void loadEmployeesFromDatabase() {
-        employees.clear();
-        String sql = "SELECT emp_id, emp_name, emp_age, department_name, emp_position, salary, hire_date FROM employees";
+            try (Connection conn = DatabaseManager.getConnection();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
 
-        try (Connection conn = DatabaseManager.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                employees.add(new EmployeeRecord(
-                        rs.getString("emp_name"),
-                        rs.getInt("emp_id"),
-                        rs.getInt("emp_age"),
-                        rs.getString("department_name"),
-                        rs.getString("emp_position"),
-                        rs.getInt("salary"),
-                        LocalDate.parse(rs.getString("hire_date"))
-                ));
+                while (rs.next()) {
+                    employees.add(new EmployeeRecord(
+                            rs.getString("emp_name"),
+                            rs.getInt("emp_id"),
+                            rs.getInt("emp_age"),
+                            rs.getString("department_name"),
+                            rs.getString("emp_position"),
+                            rs.getInt("salary"),
+                            LocalDate.parse(rs.getString("hire_date"))
+                    ));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return employees;
         }
+        return employees;
     }
 
     public boolean addEmployee(EmployeeRecord employee) {

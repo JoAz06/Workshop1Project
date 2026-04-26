@@ -64,7 +64,6 @@ public class StudentController {
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
         gpaCol.setCellValueFactory(new PropertyValueFactory<>("gpa"));
 
-        studentStore.loadStudentsFromDatabase();
         studentTable.setItems(studentStore.getStudentList());
 
         studentTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, selectedPerson) -> {
